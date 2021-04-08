@@ -1,0 +1,74 @@
+.descripcion-inicio{
+    position: absolute;
+}
+
+.descripcion-inicio > h1{
+    margin-top: 5%;
+    margin-left: 8%;
+    color: #4a148c;
+}
+
+.descripcion-inicio > h2{
+    margin-top: 3%;
+    margin-left: 8%;
+}
+
+.descripcion-inicio > h4{
+    margin-top: 3%;
+    margin-left: 8%;
+    width: 40%;
+}
+
+.imagen-inicio > img{
+    position: absolute;
+    margin-top: 7%;
+    margin-left: 55%;
+    border-radius: 10px;
+}
+
+.form-group{
+    width: 500px;
+    margin-left: 15%;
+    margin-top: 5%;
+}
+
+.div-table{
+    margin-top: 2%;
+    margin-right: 10%;
+}
+
+#finalizar{
+    margin-left: 15%;
+    width: 71%;
+}
+
+#boton-borrar{
+    margin-right: 60%;
+}
+
+#error{
+    text-align: center;
+    margin-left: 15%;
+    width: 71%;
+}
+
+#table-compras{
+    margin-left: 10%;
+    width: 80%;
+}
+
+#table-total{
+    margin-left: 40%;
+    width: 25%;
+}
+#div-compras{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 3%;
+    padding: 0.50%;
+    border-radius: 10px;
+    background-color: #cdcdcd;
+}
+.h1-compras{
+    margin-left: 27%;
+}
