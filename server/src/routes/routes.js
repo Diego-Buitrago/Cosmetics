@@ -1,8 +1,17 @@
-const {Router} = require('express')
-const router = Router()
-const {cnn_mysql} = require('../database/database');
+const express = require('express')
+const router = express.Router()
+const {cnn_mysql} = require('../database/database')
 const articulos = require('../items/info_prueba.json')
 
+/**
+ * @openapi
+ * /articulos:
+ *   get:
+ *     description: Welcome to swagger-jsdoc!
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
+ */
 router.get('/articulos', (req, res) => {
     return res.send(articulos)
 });
