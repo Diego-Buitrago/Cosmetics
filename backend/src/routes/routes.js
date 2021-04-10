@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {cnn_mysql} = require('../database/database')
+const {pool} = require('../database/database')
 const articulos = require('../items/info_prueba.json')
 
 /**
@@ -26,11 +26,14 @@ router.post('/compra', async(req, res) => {
             iva,
             total
         } = req.body
-        const [rows, fields] = await cnn_mysql.promise().execute(`INSERT INTO compras(numero_orden, fecha, cliente, subtotal, iva, total) 
-            VALUES(?, ?, ?, ?, ?, ?)`, [numero_orden, fecha, cliente, subtotal, iva, total]);
+        const client = await pool.connect()
+        const response = await client.query(
+            'INSERT INTO compras(numero_orden, fecha, cliente, subtotal, iva, total) VALUES($1, $2, $3, $4, $5, $6) RETURNING id',
+            [numero_orden, fecha, cliente, subtotal, iva, total])
 
-        if (rows.affectedRows > 0) {
+        if (response.rowsCount > 0) {
             res.json({
+                id: response.rows[0].id,
                 numero_orden: numero_orden,
                 fecha: fecha,
                 cliente: cliente,
@@ -42,27 +45,38 @@ router.post('/compra', async(req, res) => {
             res.json({});
         }
     } catch (e) {
+        console.log(e.error)
         res.status(500).json({errorCode : e.errno, message : "Error en el servidor"});
+    } finally {
+        client.release(true);
     }
 });
 
-router.get('/compras', (req, res) => {
-    cnn_mysql.query(`SELECT * FROM compras`, (error, resulset) => {
+router.get('/compras', async(req, res) => {
+    const client = await pool.connect()
+    
+    client.query(`SELECT * FROM compras`, (error, resulset) => {
+        client.release(true);
+
         if (error) {
             return res.status(500).send('se presento un error en la base de datos.')
         } else {
-            return res.json(resulset)
+            return res.json(resulset.rows)
         }
     })
 });
 
-router.get('/totales', (req, res) => {
-    cnn_mysql.query(`SELECT SUM(subtotal) as total_subtotal, SUM(iva) as total_iva, 
+router.get('/totales', async(req, res) => {
+    const client = await pool.connect()
+
+    client.query(`SELECT SUM(subtotal) as total_subtotal, SUM(iva) as total_iva, 
         SUM(total) as total_compras FROM compras`, (error, resulset) => {
+        client.release(true);
+
         if (error) {
             return res.status(500).send('se presento un error en la base de datos.')
         } else {
-            return res.json(resulset)
+            return res.json(resulset.rows)
         }
     })
 })

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 const Total_compra = () => {
 
-    const [datos, setDatos] = useState([])
+    const [datos, setDatos] = useState([{}])
     const [totales, setTotales] = useState(null)
 
     useEffect(() => {

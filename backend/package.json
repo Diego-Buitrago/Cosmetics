@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "dev": "nodemon index.js",
+    "start": "node sindex.js",
     "test": "jest"
   },
   "author": "Diego Buitrago",
@@ -20,7 +20,7 @@
     "faker": "^5.5.2",
     "jest": "^26.6.3",
     "morgan": "^1.10.0",
-    "mysql2": "^2.2.5",
+    "pg": "^8.5.1",
     "supertest": "^6.1.3",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"

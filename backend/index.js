@@ -4,7 +4,7 @@ const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 require('dotenv').config();
 const cors = require('cors');
-require('./database/database');
+require('./src/database/database');
 const app = express();
 
 app.set('port', process.env.PORT || 5002);
@@ -42,7 +42,7 @@ app.get("/costomers", (req, res) => {
 
 //Importar rutas
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
-app.use('/', require('./routes/routes'))
+app.use('/', require('./src/routes/routes'))
 
 app.listen(app.get('port'),()=>{
    console.log(`Servidor conectado en el puerto ${app.get('port')}`);
