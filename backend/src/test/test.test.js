@@ -1,7 +1,7 @@
 const request = require('supertest');
 const dateformat = require('dateformat');
 const faker = require('faker');
-const app = require('../index');
+const app = require('./../../index');
 
 describe('Prubas de los servicios', () => {
     it('verificar al leer archivo json', async() => {

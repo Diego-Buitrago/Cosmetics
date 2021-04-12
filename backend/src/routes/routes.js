@@ -59,6 +59,7 @@ router.get('/compras', async(req, res) => {
         client.release(true);
 
         if (error) {
+            console.log(error)
             return res.status(500).send('se presento un error en la base de datos.')
         } else {
             return res.json(resulset.rows)
@@ -74,6 +75,7 @@ router.get('/totales', async(req, res) => {
         client.release(true);
 
         if (error) {
+            console.log(error)
             return res.status(500).send('se presento un error en la base de datos.')
         } else {
             return res.json(resulset.rows)

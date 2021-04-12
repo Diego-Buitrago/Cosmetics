@@ -4,7 +4,6 @@ const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 require('dotenv').config();
 const cors = require('cors');
-require('./src/database/database');
 const app = express();
 
 app.set('port', process.env.PORT || 5002);
@@ -22,7 +21,7 @@ const options = {
      },
    },
    basePath: '/',
-   apis: ['./routes/routes.js'],
+   apis: ['.src/routes/routes.js'],
  };
 
 const specs = swaggerJsDoc(options)
