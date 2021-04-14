@@ -33,30 +33,33 @@ const Realizar_compra = () => {
 
     const compra = () => {
         
-        const subtotal = calSubTotal()
-        const iva = calSubTotal()  * 0.19
-        const total = calSubTotal() + ((19/100)*calSubTotal())
+        if (articulos.length > 0) {
+            const subtotal = calSubTotal()
+            const iva = calSubTotal()  * 0.19
+            const total = calSubTotal() + ((19/100)*calSubTotal())
         
-      fetch("/compra", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            numero_orden: numeroOrden,
-            fecha: fecha,
-            cliente: nombre,
-            subtotal: subtotal,
-            iva: iva,
-            total: total
-        }),
-      }).then((res) => {
-        if (res.status === 200) {
-            setExito('compra exitosa')
-            window.location.href = "/"
-        } else {setExito('Error en el servidor contacta al administrador')}
-      });
-    
+            fetch("/compra", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                numero_orden: numeroOrden,
+                fecha: fecha,
+                cliente: nombre,
+                subtotal: subtotal,
+                iva: iva,
+                total: total
+            }),
+            }).then((res) => {
+                if (res.status === 200) {
+                setExito('compra exitosa')
+                window.location.href = "/"
+            } else {setExito('Error en el servidor contacta al administrador')}
+            });
+        } else {
+            setError('No has elegido ningun articulo')
+        }
     }
 
     const addArticulo = (e)=>{
